@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D myRigidBody;
     Vector2 moveInput;
     Animator myAnimator;
-    BoxCollider2D myBoxCollider;
+    BoxCollider2D myBodyCollider;
+    CapsuleCollider2D myFeetCollider;
 
     [SerializeField] float fltPlayerRunSpeed = 5f;
     [SerializeField] float fltPlayerJumpVelocity = 5f;
@@ -21,7 +22,8 @@ public class PlayerMovement : MonoBehaviour
     {
         myRigidBody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
-        myBoxCollider = GetComponent<BoxCollider2D>();
+        myBodyCollider = GetComponent<BoxCollider2D>();
+        myFeetCollider = GetComponent<CapsuleCollider2D>();
     }
 
     void Update()
@@ -69,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJump(InputValue value)
     {
-        if (!myBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             return;
         }
@@ -81,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
 
     void ClimbLadder()
     {
-        if (!myBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))
+        if (!myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))
         {
             myRigidBody.gravityScale = fltGravityScaleAtStart;
             myAnimator.SetBool("boolIsClimbing", false);
