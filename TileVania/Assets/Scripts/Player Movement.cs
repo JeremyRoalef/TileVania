@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     Animator myAnimator;
 
     [SerializeField] float fltPlayerRunSpeed = 5f;
-
+    [SerializeField] float fltPlayerJumpVelocity = 5f;
     void Start()
     {
         myRigidBody = GetComponent<Rigidbody2D>();
@@ -58,5 +58,13 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector2(Mathf.Sign(myRigidBody.velocity.x), 1f);
         }
 
+    }
+
+    void OnJump(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            myRigidBody.velocity += new Vector2 (0f, fltPlayerJumpVelocity);
+        }
     }
 }

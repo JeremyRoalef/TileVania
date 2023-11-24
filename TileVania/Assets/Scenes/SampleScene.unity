@@ -4419,6 +4419,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 676340798089392690, guid: e805ba90bda48844786a16ab2d17190d, type: 3}
+      propertyPath: fltPlayerJumpVelocity
+      value: 17
+      objectReference: {fileID: 0}
     - target: {fileID: 5002798534869783246, guid: e805ba90bda48844786a16ab2d17190d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.74
@@ -4458,6 +4462,14 @@ PrefabInstance:
     - target: {fileID: 5002798534869783246, guid: e805ba90bda48844786a16ab2d17190d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393413358714420441, guid: e805ba90bda48844786a16ab2d17190d, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393413358714420441, guid: e805ba90bda48844786a16ab2d17190d, type: 3}
+      propertyPath: m_GravityScale
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 6891099920476327109, guid: e805ba90bda48844786a16ab2d17190d, type: 3}
       propertyPath: m_Name
