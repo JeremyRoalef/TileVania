@@ -17,7 +17,7 @@ TagManager:
   - Background
   - Bouncing
   - Enemy
-  - 
+  - Hazzard
   - 
   - 
   - 
@@ -58,6 +58,9 @@ TagManager:
     locked: 0
   - name: Blob Enemy
     uniqueID: 252717097
+    locked: 0
+  - name: Hazzard
+    uniqueID: 1575816551
     locked: 0
   - name: Player
     uniqueID: 1643185427
