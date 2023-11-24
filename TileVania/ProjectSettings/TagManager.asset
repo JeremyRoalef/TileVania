@@ -18,7 +18,7 @@ TagManager:
   - Bouncing
   - Enemy
   - Hazzard
-  - 
+  - Projectile
   - 
   - 
   - 
@@ -64,4 +64,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1643185427
+    locked: 0
+  - name: Projectile
+    uniqueID: 1213800885
     locked: 0

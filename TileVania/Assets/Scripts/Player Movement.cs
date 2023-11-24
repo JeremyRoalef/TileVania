@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float fltPlayerJumpVelocity = 5f;
     [SerializeField] float fltPlayerClimbSpeed = 2f;
     [SerializeField] Vector2 deathKick = new Vector2 (10f,10f);
+    [SerializeField] GameObject projectile;
+    [SerializeField] Transform weapon;
 
     bool boolIsAlive = true;
 
@@ -27,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         myBodyCollider = GetComponent<BoxCollider2D>();
         myFeetCollider = GetComponent<CapsuleCollider2D>();
+
     }
 
     void Update()
@@ -128,5 +131,15 @@ public class PlayerMovement : MonoBehaviour
             myAnimator.SetTrigger("Dying");
             myRigidBody.velocity = deathKick;
         }
+    }
+
+    void OnFire(InputValue value)
+    {
+        if (!boolIsAlive)
+        {
+            return;
+        }
+
+        Instantiate(projectile, weapon.position, transform.rotation);
     }
 }
