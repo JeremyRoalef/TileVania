@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float fltPlayerJumpVelocity = 5f;
     [SerializeField] float fltPlayerClimbSpeed = 2f;
 
+    bool boolIsAlive = true;
+
     float fltGravityScaleAtStart = 4.5f;
 
     void Start()
@@ -28,13 +30,25 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (!boolIsAlive)
+        {
+            return;
+        }
+
         Run();
         FlipSprite();
         ClimbLadder();
+        Die();
+
     }
 
     void OnMove(InputValue value)
     {
+        if (!boolIsAlive)
+        {
+            return;
+        }
+
         moveInput = value.Get<Vector2>();
         Debug.Log(moveInput);
     }
@@ -71,6 +85,11 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJump(InputValue value)
     {
+        if (!boolIsAlive)
+        {
+            return;
+        }
+
         if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             return;
@@ -98,5 +117,13 @@ public class PlayerMovement : MonoBehaviour
         myRigidBody.velocity = playerVelocity;
         myRigidBody.gravityScale = 0;
         myAnimator.SetBool("boolIsClimbing", boolPlayerHasVerticalSpeed);
+    }
+
+    void Die()
+    {
+        if (myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")))
+        {
+            boolIsAlive = false;
+        }
     }
 }
