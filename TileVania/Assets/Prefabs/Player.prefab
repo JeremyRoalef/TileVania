@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 847011080662464904}
   - component: {fileID: 2394190833063130977}
   - component: {fileID: 676340798089392690}
-  m_Layer: 0
+  - component: {fileID: 6590940817485132767}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +98,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1643185427
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -84256098, guid: aa1dd799af6897d44a058c705bd9dd70, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -125,8 +126,8 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.45
-  m_Material: {fileID: 0}
+  m_GravityScale: 5
+  m_Material: {fileID: 6200000, guid: 9a2c16f86891d2348bba76daf7655d2c, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -136,7 +137,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &847011080662464904
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -225,3 +226,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fltPlayerRunSpeed: 5
+  fltPlayerJumpVelocity: 17
+  fltPlayerClimbSpeed: 5
+--- !u!70 &6590940817485132767
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891099920476327109}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 9a2c16f86891d2348bba76daf7655d2c, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.03, y: -0.41}
+  m_Size: {x: 0.63, y: 0.0001}
+  m_Direction: 0
