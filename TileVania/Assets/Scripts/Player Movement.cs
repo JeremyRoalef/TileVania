@@ -89,8 +89,12 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
+
+        bool boolPlayerHasVerticalSpeed = Mathf.Abs(myRigidBody.velocity.y) > Mathf.Epsilon;
+
         Vector2 playerVelocity = new Vector2(myRigidBody.velocity.x, moveInput.y * fltPlayerClimbSpeed);
         myRigidBody.velocity = playerVelocity;
         myRigidBody.gravityScale = 0;
+        myAnimator.SetBool("boolIsClimbing", boolPlayerHasVerticalSpeed);
     }
 }
