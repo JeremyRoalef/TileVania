@@ -20,7 +20,7 @@ TagManager:
   - Enemy
   - Hazzard
   - Projectile
-  - 
+  - Interactibles
   - 
   - 
   - 
@@ -68,4 +68,7 @@ TagManager:
     locked: 0
   - name: Projectile
     uniqueID: 1213800885
+    locked: 0
+  - name: Interactibles
+    uniqueID: 2682231881
     locked: 0
