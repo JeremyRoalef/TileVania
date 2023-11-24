@@ -15,7 +15,7 @@ TagManager:
   - Ladder
   - Player
   - Background
-  - 
+  - Bouncing
   - 
   - 
   - 
@@ -52,6 +52,9 @@ TagManager:
     locked: 0
   - name: Ladder
     uniqueID: 3988739777
+    locked: 0
+  - name: Mushroom
+    uniqueID: 786884601
     locked: 0
   - name: Player
     uniqueID: 1643185427
