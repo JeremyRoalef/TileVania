@@ -11,6 +11,8 @@ public class GameSession : MonoBehaviour
     [SerializeField] TextMeshProUGUI livesText;
     [SerializeField] TextMeshProUGUI scoreText;
 
+
+
     int intScore = 0;
 
     void Awake()
@@ -51,8 +53,10 @@ public class GameSession : MonoBehaviour
 
     void ResetGameSession()
     {
+        FindObjectOfType<ScenePersist>().ResetScenePersists();
         SceneManager.LoadScene(0);
         Destroy(gameObject);
+        
     }
 
 
