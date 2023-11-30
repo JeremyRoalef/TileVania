@@ -57,6 +57,9 @@ TagManager:
   - name: Mushroom
     uniqueID: 786884601
     locked: 0
+  - name: Interactibles
+    uniqueID: 2682231881
+    locked: 0
   - name: Blob Enemy
     uniqueID: 252717097
     locked: 0
@@ -68,7 +71,4 @@ TagManager:
     locked: 0
   - name: Projectile
     uniqueID: 1213800885
-    locked: 0
-  - name: Interactibles
-    uniqueID: 2682231881
     locked: 0

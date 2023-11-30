@@ -15,10 +15,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float fltPlayerRunSpeed = 5f;
     [SerializeField] float fltPlayerJumpVelocity = 5f;
     [SerializeField] float fltPlayerClimbSpeed = 2f;
+    [SerializeField] float fltShootTime = 1;
     [SerializeField] Vector2 deathKick = new Vector2 (10f,10f);
     [SerializeField] GameObject projectile;
     [SerializeField] Transform weapon;
 
+    bool boolIsShooting = false;
+    bool boolDisableControls = false;
     bool boolIsAlive = true;
 
     float fltGravityScaleAtStart = 4.5f;
@@ -52,6 +55,11 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
+        if (boolDisableControls)
+        {
+            return;
+        }
+
 
         moveInput = value.Get<Vector2>();
         Debug.Log(moveInput);
@@ -59,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Run()
     {
+
         Vector2 playerVelocity = new Vector2(moveInput.x * fltPlayerRunSpeed, myRigidBody.velocity.y);
         myRigidBody.velocity = playerVelocity;
 
@@ -89,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJump(InputValue value)
     {
+        if (boolIsShooting) { return; }
         if (!boolIsAlive)
         {
             return;
@@ -137,11 +147,25 @@ public class PlayerMovement : MonoBehaviour
 
     void OnFire(InputValue value)
     {
-        if (!boolIsAlive)
-        {
-            return;
-        }
+        if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return; }
+        if (!boolIsAlive) { return; }
+        if (boolIsShooting) { return; }
 
+        boolIsShooting = true;
+        boolDisableControls = true;
+        moveInput = new Vector2 (0, 0);     //prevent moving in straight line
+
+        myAnimator.SetBool("boolIsShooting", true);
+        Invoke("ShootProjectile",fltShootTime);
+
+    }
+
+    void ShootProjectile()
+    {
+
+        boolDisableControls = false;
+        myAnimator.SetBool("boolIsShooting", false);
         Instantiate(projectile, weapon.position, transform.rotation);
+        boolIsShooting = false;
     }
 }

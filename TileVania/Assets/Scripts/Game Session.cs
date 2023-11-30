@@ -31,7 +31,7 @@ public class GameSession : MonoBehaviour
     void Start()
     {
         livesText.text = intPlayerLives.ToString();
-        scoreText.text = intScore.ToString();
+
     }
 
     public void ProcessPlayerDeath()
@@ -70,6 +70,6 @@ public class GameSession : MonoBehaviour
 
     void Update()
     {
-        scoreText.text = intScore.ToString();
+        scoreText.text = "Score: " + intScore.ToString();
     }
 }

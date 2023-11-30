@@ -16,6 +16,7 @@ public class Projectile : MonoBehaviour
         player = FindObjectOfType<PlayerMovement>();
 
         fltXSpeed = player.transform.localScale.x * fltProjectileSpeed;
+        transform.localScale = player.transform.localScale;
     }
 
     void Update()
@@ -27,7 +28,7 @@ public class Projectile : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            Destroy(other.gameObject);
+            Destroy(other.transform.parent.gameObject);  //destroy the parent object of the object
         }
 
         Destroy(gameObject);
