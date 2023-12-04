@@ -6,11 +6,16 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    //ignore the fact this script says player movement. this is completely for player
+    //mechanics
+
     Rigidbody2D myRigidBody;
     Vector2 moveInput;
     Animator myAnimator;
     BoxCollider2D myBodyCollider;
     CapsuleCollider2D myFeetCollider;
+
+    GameCanvas gameCanvas;
 
     [SerializeField] float fltPlayerRunSpeed = 5f;
     [SerializeField] float fltPlayerJumpVelocity = 5f;
@@ -32,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         myBodyCollider = GetComponent<BoxCollider2D>();
         myFeetCollider = GetComponent<CapsuleCollider2D>();
+        gameCanvas = FindObjectOfType<GameCanvas>();
 
     }
 
@@ -149,6 +155,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return; }
         if (!boolIsAlive) { return; }
+        if (gameCanvas.ShootOnCooldown()) { return; }
         if (boolIsShooting) { return; }
 
         boolIsShooting = true;
@@ -158,6 +165,7 @@ public class PlayerMovement : MonoBehaviour
         myAnimator.SetBool("boolIsShooting", true);
         Invoke("ShootProjectile",fltShootTime);
 
+        gameCanvas.SetTimer();
     }
 
     void ShootProjectile()

@@ -223,13 +223,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6891099920476327109}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0869457c3b8a6a44a5b3537236d10df, type: 3}
+  m_Script: {fileID: 11500000, guid: 915106110c068ad44abc4aa97275e9b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fltPlayerRunSpeed: 5
   fltPlayerJumpVelocity: 17
   fltPlayerClimbSpeed: 5
-  fltShootTime: 0.5
+  fltShootTime: 0.65
   deathKick: {x: 10, y: 10}
   projectile: {fileID: 1887461034519472989, guid: 1f792138cbb7f40409fc9127c7b06b49, type: 3}
   weapon: {fileID: 7339075041396284770}
