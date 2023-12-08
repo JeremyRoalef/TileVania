@@ -17,7 +17,6 @@ public class GameCanvas : MonoBehaviour
         image = GetComponent<Image>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         UpdateTimer();
