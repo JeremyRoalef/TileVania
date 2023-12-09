@@ -26,9 +26,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameObject projectile;
     [SerializeField] Transform weapon;
 
+    [SerializeField] ParticleSystem dirt;
+
     bool boolIsShooting = false;
     bool boolDisableControls = false;
     bool boolIsAlive = true;
+    bool boolCanPlayParticles = false;
 
     float fltGravityScaleAtStart = 4.5f;
 
@@ -71,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
         ClimbLadder();
         Die();
 
+        PlayParticleSystem();
     }
 
     void OnMove(InputValue value)
@@ -83,7 +87,6 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-
 
         moveInput = value.Get<Vector2>();
         Debug.Log(moveInput);
@@ -99,10 +102,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (boolPlayerHasHorizontalSpeed)
         {
+
             myAnimator.SetBool("boolIsRunning", true);
         }
         else
         {
+
             myAnimator.SetBool("boolIsRunning", false);
         }
 
@@ -116,7 +121,19 @@ public class PlayerMovement : MonoBehaviour
         if (boolPlayerHasHorizontalSpeed)
         {
             transform.localScale = new Vector2(Mathf.Sign(myRigidBody.velocity.x), 1f);
+            if (Mathf.Sign(myRigidBody.velocity.x) == -1)
+            {
+                dirt.transform.rotation = new Quaternion(0, 180, 0, 1);
+            }
+            else
+            {
+                {
+                    dirt.transform.rotation = new Quaternion(0, 0, 0, 1);
+                }
+            }
+
         }
+
 
     }
 
@@ -213,5 +230,23 @@ public class PlayerMovement : MonoBehaviour
     public float PlayerPositionY()
     {
         return fltPlayerPositionY;
+    }
+
+    void PlayParticleSystem()
+    {
+        if (myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")) && myRigidBody.velocity.x != 0)
+        {
+            boolCanPlayParticles = false;
+        }
+        else
+        {
+            boolCanPlayParticles = true;
+        }
+
+        if (boolCanPlayParticles)
+        {
+            dirt.Play();
+        }
+
     }
 }

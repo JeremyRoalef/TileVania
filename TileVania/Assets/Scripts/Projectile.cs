@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] float fltProjectileSpeed = 1f;
     PlayerMovement player;
     float fltXSpeed;
+    [SerializeField] ParticleSystem trail;
 
     void Start()
     {
@@ -17,6 +18,16 @@ public class Projectile : MonoBehaviour
 
         fltXSpeed = player.transform.localScale.x * fltProjectileSpeed;
         transform.localScale = player.transform.localScale;
+        trail.Play();
+
+        if (Mathf.Sign(myRigidBody.velocity.x) == -1)
+        {
+            trail.transform.rotation = new Quaternion(0, 180, 0, 1);
+        }
+        else
+        {
+            trail.transform.rotation = new Quaternion(0, 0, 0, 1);
+        }
     }
 
     void Update()
@@ -35,7 +46,6 @@ public class Projectile : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-
         Destroy(gameObject);
     }
 

@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Platforms
   - OutOfBounds
+  - Elevator
   layers:
   - Default
   - TransparentFX
@@ -50,6 +51,9 @@ TagManager:
   - name: Water
     uniqueID: 809744901
     locked: 0
+  - name: Hazzard
+    uniqueID: 1575816551
+    locked: 0
   - name: Platforms
     uniqueID: 4159038995
     locked: 0
@@ -65,8 +69,8 @@ TagManager:
   - name: Blob Enemy
     uniqueID: 252717097
     locked: 0
-  - name: Hazzard
-    uniqueID: 1575816551
+  - name: Paritcles
+    uniqueID: 4274492007
     locked: 0
   - name: Player
     uniqueID: 1643185427
