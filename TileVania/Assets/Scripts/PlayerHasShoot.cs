@@ -7,19 +7,20 @@ using UnityEngine.InputSystem;
 public class PlayerHasShoot : MonoBehaviour
 {
     Image image;
-    PlayerMovement playerMovement;
+    GameSession gameSession;
 
     void Start()
     {
         image = GetComponent<Image>();
+
+
     }
 
 
     void Update()
     {
-        playerMovement = FindObjectOfType<PlayerMovement>();
-
-        if (!playerMovement.PlayerHasShootAbility())
+        gameSession = FindObjectOfType<GameSession>();
+        if (!gameSession.PlayerHasShootAbility())
         {
             image.color = new Color(image.color.r, image.color.g, image.color.b, 0f);
         }

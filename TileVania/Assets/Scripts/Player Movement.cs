@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     GameCanvas gameCanvas;
     tpUIscript tpUiScript;
+    GameSession gameSession;
 
     [SerializeField] float fltPlayerRunSpeed = 5f;
     [SerializeField] float fltPlayerJumpVelocity = 5f;
@@ -32,8 +33,7 @@ public class PlayerMovement : MonoBehaviour
     bool boolDisableControls = false;
     bool boolIsAlive = true;
     bool boolCanPlayParticles = false;
-    bool boolPlayerHasShootAbility = false;
-    bool boolPlayerHasTpAbility = false;
+
 
     float fltGravityScaleAtStart = 4.5f;
 
@@ -65,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
         gameCanvas = FindObjectOfType<GameCanvas>();
         tpUiScript = FindObjectOfType<tpUIscript>();
         mousePosition = FindObjectOfType<MousePosition>();
+        gameSession = FindObjectOfType<GameSession>();
 
         if (!boolIsAlive)
         {
@@ -194,7 +195,7 @@ public class PlayerMovement : MonoBehaviour
         if (!boolIsAlive) { return; }
         if (gameCanvas.ShootOnCooldown()) { return; }
         if (boolIsShooting) { return; }
-        if (!boolPlayerHasShootAbility) { return; }
+        if (!gameSession.PlayerHasShootAbility()) { return; }
 
         boolIsShooting = true;
         boolDisableControls = true;
@@ -211,7 +212,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (tpUiScript.TpOnCooldown()){ return; }
         if (!mousePosition.CanTeleport()) { return; }
-        if (!boolPlayerHasTpAbility) { return; }
+        if (!gameSession.PlayerHasTpAbility()) { return; }
 
         tpUiScript.SetTimer();
         transform.localPosition = mousePosition.GetMousePosition();
@@ -240,13 +241,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.tag == "TpAbility")
         {
-            boolPlayerHasTpAbility = true;
+            gameSession.PlayerPickedUpTpAbility(true);
             Destroy(collision.gameObject);
         }
         if (collision.tag == "ShootAbility")
         {
+            gameSession.PlayerPickedUpShootAbility(true);   
             Destroy(collision.gameObject);
-            boolPlayerHasShootAbility = true;
+
         }
     }
 
@@ -268,12 +270,5 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    public bool PlayerHasShootAbility()
-    {
-        return boolPlayerHasShootAbility;
-    }
-    public bool PlayerHasTpAbility()
-    {
-        return boolPlayerHasTpAbility;
-    }
+
 }

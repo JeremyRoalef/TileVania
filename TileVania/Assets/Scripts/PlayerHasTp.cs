@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerHasTp : MonoBehaviour
 {
     Image image;
-    PlayerMovement playerMovement;
+    GameSession gameSession;
 
     void Start()
     {
@@ -17,9 +17,9 @@ public class PlayerHasTp : MonoBehaviour
 
     void Update()
     {
-        playerMovement = FindObjectOfType<PlayerMovement>();
+        gameSession = FindObjectOfType<GameSession>();
 
-        if (!playerMovement.PlayerHasTpAbility())
+        if (!gameSession.PlayerHasTpAbility())
         {
             image.color = new Color(image.color.r, image.color.g, image.color.b, 0f);
         }

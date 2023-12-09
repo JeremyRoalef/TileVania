@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8606940722949383436}
   - component: {fileID: 3711444844782444669}
   - component: {fileID: 6974100590512600857}
-  - component: {fileID: 5519048503851188030}
   m_Layer: 0
   m_Name: Charger
   m_TagString: Untagged
@@ -35,6 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6291877918009686253}
+  - {fileID: 8000766174047567795}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8563020853872531768
@@ -165,13 +165,45 @@ CapsuleCollider2D:
   m_Offset: {x: -0.04859782, y: 0.0000000057933107}
   m_Size: {x: 9.642467, y: 1.000054}
   m_Direction: 1
---- !u!61 &5519048503851188030
+--- !u!1 &3411706534305405379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8000766174047567795}
+  - component: {fileID: 7938120616348953507}
+  m_Layer: 11
+  m_Name: Enemy Hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8000766174047567795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3411706534305405379}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1624914485354665050}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &7938120616348953507
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 959077462488303723}
+  m_GameObject: {fileID: 3411706534305405379}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: da02c92d149aef44fae68703f24aec10, type: 2}
@@ -220,7 +252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6291877918009686253}
   - component: {fileID: 5712182912429269979}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Charger Hitbox
   m_TagString: Enemy
   m_Icon: {fileID: 0}

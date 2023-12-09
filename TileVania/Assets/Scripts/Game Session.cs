@@ -11,7 +11,8 @@ public class GameSession : MonoBehaviour
     [SerializeField] TextMeshProUGUI livesText;
     [SerializeField] TextMeshProUGUI scoreText;
 
-
+    bool boolPlayerHasShootAbility = false;
+    bool boolPlayerHasTpAbility = false;
 
     int intScore = 0;
 
@@ -71,5 +72,23 @@ public class GameSession : MonoBehaviour
     void Update()
     {
         scoreText.text = "Score: " + intScore.ToString();
+    }
+
+    public bool PlayerHasShootAbility()
+    {
+        return boolPlayerHasShootAbility;
+    }
+    public bool PlayerHasTpAbility()
+    {
+        return boolPlayerHasTpAbility;
+    }
+
+    public void PlayerPickedUpTpAbility(bool boolHasPickedUpTp)
+    {
+        boolPlayerHasTpAbility = boolHasPickedUpTp;
+    }
+    public void PlayerPickedUpShootAbility(bool boolHasPickedUpShoot)
+    {
+        boolPlayerHasShootAbility = boolHasPickedUpShoot;
     }
 }
