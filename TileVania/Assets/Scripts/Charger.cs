@@ -44,8 +44,9 @@ public class Charger : MonoBehaviour
         if (collision.tag == "Player")
         {
             Charge();
-
         }
+
+
     }
 
     private void Charge()
@@ -60,10 +61,12 @@ public class Charger : MonoBehaviour
         if (fltChargerPositionX < fltChargerPositionY)
         {
             myRigidBody.velocity += new Vector2(fltChargerVelocity, 0f);
+            transform.localScale = new Vector3(Mathf.Sign(myRigidBody.velocity.x),1,1);
         }
         else
         {
             myRigidBody.velocity += new Vector2(-fltChargerVelocity, 0f);
+            transform.localScale = new Vector3(Mathf.Sign(myRigidBody.velocity.x), 1, 1);
         }
 
 
