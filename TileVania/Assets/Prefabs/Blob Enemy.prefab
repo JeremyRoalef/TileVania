@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3968298444594647159}
   - component: {fileID: 5254047351393499815}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Hitbox
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7938166698003539541}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.108, y: 2.662, z: 0.12073389}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

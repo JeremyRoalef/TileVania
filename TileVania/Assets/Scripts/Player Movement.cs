@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     CapsuleCollider2D myFeetCollider;
 
     GameCanvas gameCanvas;
+    tpUIscript tpUiScript;
 
     [SerializeField] float fltPlayerRunSpeed = 5f;
     [SerializeField] float fltPlayerJumpVelocity = 5f;
@@ -34,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
     //store player's position in variables to use in other scripts
     float fltPlayerPositionX;
     float fltPlayerPositionY;
+
+    MousePosition mousePosition;
 
 
     void Start()
@@ -55,6 +58,8 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log(fltPlayerPositionX + "," + fltPlayerPositionY);
 
         gameCanvas = FindObjectOfType<GameCanvas>();
+        tpUiScript = FindObjectOfType<tpUIscript>();
+        mousePosition = FindObjectOfType<MousePosition>();
 
         if (!boolIsAlive)
         {
@@ -179,6 +184,16 @@ public class PlayerMovement : MonoBehaviour
         Invoke("ShootProjectile",fltShootTime);
 
         gameCanvas.SetTimer();
+    }
+
+    //ignore the fact this says ongrapple, its now a teleport and I refuse to change it!
+    void OnGrapple(InputValue value)
+    {
+        if (tpUiScript.TpOnCooldown()){ return; }
+        if (!mousePosition.CanTeleport()) { return; }
+
+        tpUiScript.SetTimer();
+        transform.localPosition = mousePosition.GetMousePosition();
     }
 
     void ShootProjectile()

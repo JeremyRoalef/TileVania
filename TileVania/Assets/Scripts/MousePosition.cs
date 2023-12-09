@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,8 @@ public class MousePosition : MonoBehaviour
 
     public Vector3 screenPosition;
     public Vector3 worldPosition;
+
+    bool boolPlayerCanTeleport = true;
 
     void Start()
     {
@@ -23,5 +26,32 @@ public class MousePosition : MonoBehaviour
         worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
 
         transform.position = worldPosition;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "OutOfBounds")
+        {
+            Debug.Log("TRIGGERED");
+            boolPlayerCanTeleport = false;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "OutOfBounds")
+        {
+            Debug.Log("TRIGGERED");
+            boolPlayerCanTeleport = true;
+        }
+    }
+
+    public Vector3 GetMousePosition()
+    {
+        return worldPosition;
+    }
+    public bool CanTeleport()
+    {
+        return boolPlayerCanTeleport;
     }
 }

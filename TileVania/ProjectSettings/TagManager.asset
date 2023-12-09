@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Platforms
+  - OutOfBounds
   layers:
   - Default
   - TransparentFX
@@ -21,7 +23,7 @@ TagManager:
   - Hazzard
   - Projectile
   - Interactibles
-  - 
+  - Hitbox
   - 
   - 
   - 
