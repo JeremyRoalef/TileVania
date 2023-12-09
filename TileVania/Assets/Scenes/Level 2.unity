@@ -9434,10 +9434,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1856548774}
     m_Modifications:
-    - target: {fileID: 3215161222736679385, guid: f36d998eed1b64942af6e8414cafafd3, type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 7938166698003539541, guid: f36d998eed1b64942af6e8414cafafd3, type: 3}
       propertyPath: m_Name
       value: Blob Enemy
