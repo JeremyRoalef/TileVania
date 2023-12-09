@@ -8,6 +8,8 @@ TagManager:
   - Platforms
   - OutOfBounds
   - Elevator
+  - ShootAbility
+  - TpAbility
   layers:
   - Default
   - TransparentFX

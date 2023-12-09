@@ -20,6 +20,8 @@ public class tpUIscript : MonoBehaviour
     void Update()
     {
         UpdateTimer();
+
+
     }
 
     public void SetTimer()

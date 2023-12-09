@@ -37,6 +37,7 @@ public class Charger : MonoBehaviour
         fltPlayerPositionY = player.PlayerPositionY();
 
         UpdateChargeTimer();
+        Die();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -81,6 +82,14 @@ public class Charger : MonoBehaviour
         {
             fltChargeDelay = 3f;
             boolHasCharged = false;
+        }
+    }
+
+    void Die()
+    {
+        if (myRigidBody.IsTouchingLayers(LayerMask.GetMask("Hazzard")))
+        {
+            Destroy(this.gameObject);
         }
     }
 

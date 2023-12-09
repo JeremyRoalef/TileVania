@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5681481772742920890}
   - component: {fileID: 2400055788022106411}
   - component: {fileID: 7282915716681788483}
+  - component: {fileID: 2427093706104405144}
   m_Layer: 5
   m_Name: TP Image2
   m_TagString: Untagged
@@ -75,6 +76,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2427093706104405144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532857247598118656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f67ca500d067f346b237a4b3ab3b516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &889394444021957756
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,6 +479,7 @@ GameObject:
   - component: {fileID: 7125144333977224118}
   - component: {fileID: 6735052133515598939}
   - component: {fileID: 2857689898847616674}
+  - component: {fileID: 5459182447345068015}
   m_Layer: 5
   m_Name: F-Press Image
   m_TagString: Untagged
@@ -530,6 +544,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5459182447345068015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514348487458895331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f67ca500d067f346b237a4b3ab3b516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2718562365829362288
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,6 +615,7 @@ GameObject:
   - component: {fileID: 6785899445997644645}
   - component: {fileID: 6447137326696130862}
   - component: {fileID: 4840936005934878757}
+  - component: {fileID: 6924969706174417766}
   m_Layer: 5
   m_Name: TP Image3
   m_TagString: Untagged
@@ -653,6 +680,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6924969706174417766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3010396203304199079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f67ca500d067f346b237a4b3ab3b516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3582352790326626267
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,6 +791,7 @@ GameObject:
   - component: {fileID: 1763918986098221005}
   - component: {fileID: 6838798852541644835}
   - component: {fileID: 7293732059733523511}
+  - component: {fileID: 2082373917296342032}
   m_Layer: 5
   m_Name: TP Image1
   m_TagString: Untagged
@@ -816,6 +856,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2082373917296342032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5250809239214294650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f67ca500d067f346b237a4b3ab3b516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5585477527593908005
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,6 +879,7 @@ GameObject:
   - component: {fileID: 1831840840524519177}
   - component: {fileID: 2992422102667223622}
   - component: {fileID: 5051011789760690083}
+  - component: {fileID: 8704849135091396815}
   m_Layer: 5
   m_Name: Left-Click Image
   m_TagString: Untagged
@@ -891,6 +944,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8704849135091396815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5585477527593908005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 050741b39f892d44eb71790ad46bcc60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6897588692500443039
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,6 +1042,7 @@ GameObject:
   - component: {fileID: 7353583406761147299}
   - component: {fileID: 580484590557806204}
   - component: {fileID: 6206598437986288737}
+  - component: {fileID: 2277586555651454988}
   m_Layer: 5
   m_Name: PlayerShoot Image
   m_TagString: Untagged
@@ -1041,6 +1107,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2277586555651454988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7598822260019026615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 050741b39f892d44eb71790ad46bcc60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9009262152440876021
 GameObject:
   m_ObjectHideFlags: 0

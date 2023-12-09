@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     bool boolDisableControls = false;
     bool boolIsAlive = true;
     bool boolCanPlayParticles = false;
+    bool boolPlayerHasShootAbility = false;
+    bool boolPlayerHasTpAbility = false;
 
     float fltGravityScaleAtStart = 4.5f;
 
@@ -192,6 +194,7 @@ public class PlayerMovement : MonoBehaviour
         if (!boolIsAlive) { return; }
         if (gameCanvas.ShootOnCooldown()) { return; }
         if (boolIsShooting) { return; }
+        if (!boolPlayerHasShootAbility) { return; }
 
         boolIsShooting = true;
         boolDisableControls = true;
@@ -208,6 +211,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (tpUiScript.TpOnCooldown()){ return; }
         if (!mousePosition.CanTeleport()) { return; }
+        if (!boolPlayerHasTpAbility) { return; }
 
         tpUiScript.SetTimer();
         transform.localPosition = mousePosition.GetMousePosition();
@@ -232,6 +236,20 @@ public class PlayerMovement : MonoBehaviour
         return fltPlayerPositionY;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "TpAbility")
+        {
+            boolPlayerHasTpAbility = true;
+            Destroy(collision.gameObject);
+        }
+        if (collision.tag == "ShootAbility")
+        {
+            Destroy(collision.gameObject);
+            boolPlayerHasShootAbility = true;
+        }
+    }
+
     void PlayParticleSystem()
     {
         if (myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")) && myRigidBody.velocity.x != 0)
@@ -248,5 +266,14 @@ public class PlayerMovement : MonoBehaviour
             dirt.Play();
         }
 
+    }
+
+    public bool PlayerHasShootAbility()
+    {
+        return boolPlayerHasShootAbility;
+    }
+    public bool PlayerHasTpAbility()
+    {
+        return boolPlayerHasTpAbility;
     }
 }
