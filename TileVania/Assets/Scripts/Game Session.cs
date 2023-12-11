@@ -33,6 +33,9 @@ public class GameSession : MonoBehaviour
     {
         livesText.text = intPlayerLives.ToString();
 
+        //https://docs.unity3d.com/ScriptReference/Cursor-visible.html
+        Cursor.visible = false;
+
     }
 
     public void ProcessPlayerDeath()
