@@ -59,14 +59,14 @@ public class Charger : MonoBehaviour
 
         boolHasCharged = true;
 
-        if (fltChargerPositionX < fltChargerPositionY)
+        if (fltChargerPositionX < fltPlayerPositionX)
         {
-            myRigidBody.velocity += new Vector2(fltChargerVelocity, 0f);
+            myRigidBody.velocity = new Vector2(fltChargerVelocity, 0f);
             transform.localScale = new Vector3(Mathf.Sign(myRigidBody.velocity.x),1,1);
         }
         else
         {
-            myRigidBody.velocity += new Vector2(-fltChargerVelocity, 0f);
+            myRigidBody.velocity = new Vector2(-fltChargerVelocity, 0f);
             transform.localScale = new Vector3(Mathf.Sign(myRigidBody.velocity.x), 1, 1);
         }
 

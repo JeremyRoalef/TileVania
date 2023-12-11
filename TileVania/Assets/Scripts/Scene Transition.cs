@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelExit : MonoBehaviour
+public class SceneTransition : MonoBehaviour
 {
     [SerializeField] float fltLevelLoadDelay = 1f;
+
+    //Updade script to do things if scene level index is last room in the level
+    // ex: if level 1-4 is last level in level 1, return to main menu
+    //change how to swap scenes from using indexes to scene names
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -30,5 +34,14 @@ public class LevelExit : MonoBehaviour
 
         FindObjectOfType<ScenePersist>().ResetScenePersists();
         SceneManager.LoadScene(intNextSceneIndex);
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("Level 1-1");
+    }
+    public void Tutorial()
+    {
+        SceneManager.LoadScene(1);
     }
 }

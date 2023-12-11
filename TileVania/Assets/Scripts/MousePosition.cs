@@ -15,7 +15,7 @@ public class MousePosition : MonoBehaviour
 
     void Start()
     {
-        
+        Cursor.visible = false;
     }
 
     void Update()

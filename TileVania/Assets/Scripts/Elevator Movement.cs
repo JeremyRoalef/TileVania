@@ -10,14 +10,15 @@ public class ElevatorMovement : MonoBehaviour
     void Start()
     {
         myRigidBody = GetComponent<Rigidbody2D>();
-        myRigidBody.velocity = new Vector2 (0, -fltElevatorSpeed);
+        myRigidBody.velocity = new Vector2 (0, fltElevatorSpeed);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.tag == "Elevator")
         {
-            myRigidBody.velocity = new Vector2(0, -myRigidBody.velocity.y);
+            myRigidBody.velocity = new Vector2(0, 0);
+            Invoke("ChangeDirection", 0.5f);
         }
 
     }
@@ -26,5 +27,11 @@ public class ElevatorMovement : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void ChangeDirection()
+    {
+        fltElevatorSpeed *= -1;
+        myRigidBody.velocity = new Vector2(0, fltElevatorSpeed);
     }
 }
