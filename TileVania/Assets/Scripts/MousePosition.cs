@@ -15,6 +15,7 @@ public class MousePosition : MonoBehaviour
 
     void Start()
     {
+        //https://docs.unity3d.com/ScriptReference/Cursor-visible.html
         Cursor.visible = false;
     }
 

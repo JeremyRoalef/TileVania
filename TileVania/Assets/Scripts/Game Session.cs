@@ -33,7 +33,7 @@ public class GameSession : MonoBehaviour
     {
         livesText.text = intPlayerLives.ToString();
 
-        //https://docs.unity3d.com/ScriptReference/Cursor-visible.html
+
 
     }
 
@@ -74,6 +74,12 @@ public class GameSession : MonoBehaviour
     void Update()
     {
         scoreText.text = "Score: " + intScore.ToString();
+
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Start Screen"))
+        {
+            boolPlayerHasShootAbility = false;
+            boolPlayerHasTpAbility = false;
+        }
     }
 
     public bool PlayerHasShootAbility()
