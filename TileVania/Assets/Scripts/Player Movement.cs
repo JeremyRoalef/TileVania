@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float fltPlayerJumpVelocity = 5f;
     [SerializeField] float fltPlayerClimbSpeed = 2f;
     [SerializeField] float fltShootTime = 1;
-    [SerializeField] Vector2 deathKick = new Vector2 (10f,10f);
+    [SerializeField] Vector2 deathKick = new Vector2(10f, 10f);
     [SerializeField] GameObject projectile;
     [SerializeField] Transform weapon;
 
@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     bool boolIsAlive = true;
     bool boolCanPlayParticles = false;
     bool boolPlayerIsOnLadder = false;
+    bool boolHasJumped = false;
 
     float fltGravityScaleAtStart = 4.5f;
 
@@ -72,12 +73,18 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+
         Run();
         FlipSprite();
         ClimbLadder();
         Die();
 
         PlayParticleSystem();
+
+        if (boolHasJumped)
+        {
+            Invoke("CheckIfPlayerHasLanded", 0.2f);
+        }
     }
 
     void OnMove(InputValue value)
@@ -146,9 +153,13 @@ public class PlayerMovement : MonoBehaviour
         if (!boolIsAlive) { return; }
         if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return; }
 
+
         if (value.isPressed)
         {
-            myRigidBody.velocity += new Vector2 (0f, fltPlayerJumpVelocity);
+            boolHasJumped = true;
+            myRigidBody.velocity += new Vector2(0f, fltPlayerJumpVelocity);
+            myAnimator.SetBool("boolIsJumping", true);
+
         }
     }
 
@@ -168,13 +179,17 @@ public class PlayerMovement : MonoBehaviour
 
         if (boolPayerIsClimbingLadder)
         {
+
+
             myRigidBody.gravityScale = 0;
             Vector2 playerVelocity = new Vector2(0, moveInput.y * fltPlayerClimbSpeed);
             myRigidBody.velocity = playerVelocity;
 
             boolPlayerIsOnLadder = true;
+            myAnimator.SetBool("boolIsJumping", false);
             myAnimator.SetBool("boolIsIdleOnLadder", false);
             myAnimator.SetBool("boolIsClimbing", boolPayerIsClimbingLadder);
+
         }
         else
         {
@@ -212,10 +227,10 @@ public class PlayerMovement : MonoBehaviour
 
         boolIsShooting = true;
         boolDisableControls = true;
-        moveInput = new Vector2 (0, 0);     //prevent moving in straight line
+        moveInput = new Vector2(0, 0);     //prevent moving in straight line
 
         myAnimator.SetBool("boolIsShooting", true);
-        Invoke("ShootProjectile",fltShootTime);
+        Invoke("ShootProjectile", fltShootTime);
 
         gameCanvas.SetTimer();
     }
@@ -223,7 +238,7 @@ public class PlayerMovement : MonoBehaviour
     //ignore the fact this says ongrapple, its now a teleport and I refuse to change it!
     void OnGrapple(InputValue value)
     {
-        if (tpUiScript.TpOnCooldown()){ return; }
+        if (tpUiScript.TpOnCooldown()) { return; }
         if (!mousePosition.CanTeleport()) { return; }
         if (!gameSession.PlayerHasTpAbility()) { return; }
 
@@ -259,7 +274,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (collision.tag == "ShootAbility")
         {
-            gameSession.PlayerPickedUpShootAbility(true);   
+            gameSession.PlayerPickedUpShootAbility(true);
             Destroy(collision.gameObject);
 
         }
@@ -283,5 +298,11 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-
+    void CheckIfPlayerHasLanded()
+    {
+        if (myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))){
+            boolHasJumped = false;
+            myAnimator.SetBool("boolIsJumping", false);
+        }
+    }
 }
