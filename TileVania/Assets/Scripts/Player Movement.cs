@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     bool boolDisableControls = false;
     bool boolIsAlive = true;
     bool boolCanPlayParticles = false;
-
+    bool boolPlayerIsOnLadder = false;
 
     float fltGravityScaleAtStart = 4.5f;
 
@@ -143,15 +143,9 @@ public class PlayerMovement : MonoBehaviour
     void OnJump(InputValue value)
     {
         if (boolIsShooting) { return; }
-        if (!boolIsAlive)
-        {
-            return;
-        }
+        if (!boolIsAlive) { return; }
+        if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return; }
 
-        if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
-        {
-            return;
-        }
         if (value.isPressed)
         {
             myRigidBody.velocity += new Vector2 (0f, fltPlayerJumpVelocity);
@@ -160,21 +154,39 @@ public class PlayerMovement : MonoBehaviour
 
     void ClimbLadder()
     {
+
         if (!myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))
         {
             myRigidBody.gravityScale = fltGravityScaleAtStart;
             myAnimator.SetBool("boolIsClimbing", false);
+            myAnimator.SetBool("boolIsIdleOnLadder", false);
+            boolPlayerIsOnLadder = false;
             return;
-
         }
 
+        bool boolPayerIsClimbingLadder = Mathf.Abs(moveInput.y) > Mathf.Epsilon;
 
-        bool boolPlayerHasVerticalSpeed = Mathf.Abs(myRigidBody.velocity.y) > Mathf.Epsilon;
+        if (boolPayerIsClimbingLadder)
+        {
+            myRigidBody.gravityScale = 0;
+            Vector2 playerVelocity = new Vector2(0, moveInput.y * fltPlayerClimbSpeed);
+            myRigidBody.velocity = playerVelocity;
 
-        Vector2 playerVelocity = new Vector2(myRigidBody.velocity.x, moveInput.y * fltPlayerClimbSpeed);
-        myRigidBody.velocity = playerVelocity;
-        myRigidBody.gravityScale = 0;
-        myAnimator.SetBool("boolIsClimbing", boolPlayerHasVerticalSpeed);
+            boolPlayerIsOnLadder = true;
+            myAnimator.SetBool("boolIsIdleOnLadder", false);
+            myAnimator.SetBool("boolIsClimbing", boolPayerIsClimbingLadder);
+        }
+        else
+        {
+            myAnimator.SetBool("boolIsIdleOnLadder", true);
+
+            if (boolPlayerIsOnLadder)
+            {
+                myRigidBody.velocity = new Vector2(moveInput.x * fltPlayerRunSpeed, 0f);
+            }
+
+
+        }
     }
 
     void Die()
@@ -196,6 +208,7 @@ public class PlayerMovement : MonoBehaviour
         if (gameCanvas.ShootOnCooldown()) { return; }
         if (boolIsShooting) { return; }
         if (!gameSession.PlayerHasShootAbility()) { return; }
+        if (boolPlayerIsOnLadder) { return; }
 
         boolIsShooting = true;
         boolDisableControls = true;
