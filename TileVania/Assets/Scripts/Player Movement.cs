@@ -30,7 +30,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] ParticleSystem dirt;
     [SerializeField] private GameObject wallCheck;
     [SerializeField] private LayerMask wallLayer;
-    
+    [SerializeField] float fltwallJumpTime = 1f;
+    [SerializeField] float fltPlayerHorizontalWallJumpSpeed;
+
     bool boolIsShooting = false;
     bool boolDisableControls = false;
     bool boolIsAlive = true;
@@ -38,6 +40,9 @@ public class PlayerMovement : MonoBehaviour
     bool boolPlayerIsOnLadder = false;
     bool boolHasJumped = false;
     bool boolIsWallSliding;
+    bool boolIsWallJumping;
+
+
 
     float fltGravityScaleAtStart = 4.5f;
     //store player's position in variables to use in other scripts
@@ -81,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
         ClimbLadder();
         Die();
         PlayParticleSystem();
-
+        IsNoLongerWallJumping();
         if (boolHasJumped)
         {
             Invoke("CheckIfPlayerHasLanded", 0.2f);
@@ -110,6 +115,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Run()
     {
+        if (boolIsWallJumping)
+        {
+            return;
+        }
 
         Vector2 playerVelocity = new Vector2(moveInput.x * fltPlayerRunSpeed, myRigidBody.velocity.y);
         myRigidBody.velocity = playerVelocity;
@@ -173,7 +182,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (IsWallSliding() && value.isPressed)
         {
-            myRigidBody.velocity = new Vector2(-moveInput.x * fltPlayerRunSpeed, fltPlayerJumpVelocity);
+            boolIsWallJumping = true;
+            myRigidBody.velocity = new Vector2(-moveInput.x * fltPlayerHorizontalWallJumpSpeed, fltPlayerJumpVelocity);
             return;
         }
 
@@ -326,6 +336,21 @@ public class PlayerMovement : MonoBehaviour
         if (myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))){
             boolHasJumped = false;
             myAnimator.SetBool("boolIsJumping", false);
+        }
+    }
+
+    void IsNoLongerWallJumping()
+    {
+
+
+        if (boolIsWallJumping && fltwallJumpTime > 0)
+        {
+            fltwallJumpTime -= Time.deltaTime;
+        }
+        else
+        {
+            boolIsWallJumping = false;
+            fltwallJumpTime = 0.3f;
         }
     }
 }
