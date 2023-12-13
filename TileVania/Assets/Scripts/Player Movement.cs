@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     Animator myAnimator;
     BoxCollider2D myBodyCollider;
     CapsuleCollider2D myFeetCollider;
+    BoxCollider2D wallCheckCollider;
 
     GameCanvas gameCanvas;
     tpUIscript tpUiScript;
@@ -26,18 +27,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Vector2 deathKick = new Vector2(10f, 10f);
     [SerializeField] GameObject projectile;
     [SerializeField] Transform weapon;
-
     [SerializeField] ParticleSystem dirt;
-
+    [SerializeField] private GameObject wallCheck;
+    [SerializeField] private LayerMask wallLayer;
+    
     bool boolIsShooting = false;
     bool boolDisableControls = false;
     bool boolIsAlive = true;
     bool boolCanPlayParticles = false;
     bool boolPlayerIsOnLadder = false;
     bool boolHasJumped = false;
+    bool boolIsWallSliding;
 
     float fltGravityScaleAtStart = 4.5f;
-
     //store player's position in variables to use in other scripts
     float fltPlayerPositionX;
     float fltPlayerPositionY;
@@ -51,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         myBodyCollider = GetComponent<BoxCollider2D>();
         myFeetCollider = GetComponent<CapsuleCollider2D>();
-
+        wallCheckCollider = wallCheck.GetComponent<BoxCollider2D>();
 
     }
 
@@ -78,12 +80,16 @@ public class PlayerMovement : MonoBehaviour
         FlipSprite();
         ClimbLadder();
         Die();
-
         PlayParticleSystem();
 
         if (boolHasJumped)
         {
             Invoke("CheckIfPlayerHasLanded", 0.2f);
+        }
+
+        if (IsWallSliding())
+        {
+            Debug.Log("wall sliding");
         }
     }
 
@@ -147,12 +153,29 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    bool IsWallSliding()
+    {
+        if (wallCheckCollider.IsTouchingLayers(LayerMask.GetMask("Wall")) && myRigidBody.velocity.x != 0 && !myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     void OnJump(InputValue value)
     {
         if (boolIsShooting) { return; }
         if (!boolIsAlive) { return; }
-        if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return; }
+        if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")) && !IsWallSliding()) { return; }
 
+        if (IsWallSliding() && value.isPressed)
+        {
+            myRigidBody.velocity = new Vector2(-moveInput.x * fltPlayerRunSpeed, fltPlayerJumpVelocity);
+            return;
+        }
 
         if (value.isPressed)
         {
