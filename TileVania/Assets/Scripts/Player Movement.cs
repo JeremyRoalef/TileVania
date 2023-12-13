@@ -164,12 +164,14 @@ public class PlayerMovement : MonoBehaviour
 
     bool IsWallSliding()
     {
-        if (wallCheckCollider.IsTouchingLayers(LayerMask.GetMask("Wall")) && myRigidBody.velocity.x != 0 && !myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        if (wallCheckCollider.IsTouchingLayers(LayerMask.GetMask("Wall")) && myRigidBody.velocity.x != 0 && !myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")) && !boolIsWallJumping)
         {
+            myRigidBody.velocity = new Vector2(myRigidBody.velocity.x, -2f);
             return true;
         }
         else
         {
+
             return false;
         }
     }
@@ -179,6 +181,7 @@ public class PlayerMovement : MonoBehaviour
         if (boolIsShooting) { return; }
         if (!boolIsAlive) { return; }
         if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")) && !IsWallSliding()) { return; }
+
 
         if (IsWallSliding() && value.isPressed)
         {
