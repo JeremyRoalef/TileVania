@@ -205,7 +205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 89116616ed646da4caaa8dcb0064d2d0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.04
+      value: -4.84
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 89116616ed646da4caaa8dcb0064d2d0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -347,4 +347,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01e4fe580963e0c488e2775bfa2f01b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fltElevatorSpeed: 1.5
+  fltPlayerOnElevatorSpeed: 3
+  fltElevatorFallSpeed: 1.5

@@ -180,7 +180,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (boolIsShooting) { return; }
         if (!boolIsAlive) { return; }
-        if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")) && !IsWallSliding()) { return; }
+        if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground", "Elevator")) && !IsWallSliding()) { return; }
 
 
         if (IsWallSliding() && value.isPressed)
@@ -336,7 +336,7 @@ public class PlayerMovement : MonoBehaviour
 
     void CheckIfPlayerHasLanded()
     {
-        if (myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))){
+        if (myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground", "Elevator"))){
             boolHasJumped = false;
             myAnimator.SetBool("boolIsJumping", false);
         }

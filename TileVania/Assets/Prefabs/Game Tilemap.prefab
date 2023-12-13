@@ -1302,7 +1302,6 @@ GameObject:
   - component: {fileID: 7002594553094681010}
   - component: {fileID: 4952805132985286731}
   - component: {fileID: 1286417447302078706}
-  - component: {fileID: 8387505315753577550}
   m_Layer: 9
   m_Name: Background Tilemap
   m_TagString: Untagged
@@ -1498,56 +1497,6 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!60 &8387505315753577550
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6463441400228041050}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -1.7496431, y: 16.83889}
-      - {x: -9.901991, y: 16.874039}
-      - {x: -9.790146, y: -5.6639466}
-      - {x: 14.083845, y: -5.952312}
-      - {x: 14.00905, y: 16.947182}
-  m_UseDelaunayMesh: 0
 --- !u!1 &7207317554319667503
 GameObject:
   m_ObjectHideFlags: 0
