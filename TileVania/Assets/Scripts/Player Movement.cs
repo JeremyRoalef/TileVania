@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     GameCanvas gameCanvas;
     tpUIscript tpUiScript;
     GameSession gameSession;
+    SceneTransition sceneTransition;
 
     [SerializeField] float fltPlayerRunSpeed = 5f;
     [SerializeField] float fltPlayerJumpVelocity = 5f;
@@ -68,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
         tpUiScript = FindObjectOfType<tpUIscript>();
         mousePosition = FindObjectOfType<MousePosition>();
         gameSession = FindObjectOfType<GameSession>();
+
 
         if (!boolIsAlive)
         {
@@ -272,6 +274,7 @@ public class PlayerMovement : MonoBehaviour
         if (!mousePosition.CanTeleport()) { return; }
         if (!gameSession.PlayerHasTpAbility()) { return; }
 
+
         tpUiScript.SetTimer();
         transform.localPosition = mousePosition.GetMousePosition();
     }
@@ -297,6 +300,11 @@ public class PlayerMovement : MonoBehaviour
             gameSession.PlayerPickedUpShootAbility(true);
             Destroy(collision.gameObject);
 
+        }
+        if (collision.tag == "Exit")
+        {
+            sceneTransition = FindObjectOfType<SceneTransition>();
+            sceneTransition.LoadNextLevel();
         }
     }
 

@@ -332,8 +332,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1733881209}
-        m_TargetAssemblyTypeName: LevelExit, Assembly-CSharp
-        m_MethodName: Tutorial
+        m_TargetAssemblyTypeName: SceneTransition, Assembly-CSharp
+        m_MethodName: StartTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -599,8 +599,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1733881209}
-        m_TargetAssemblyTypeName: LevelExit, Assembly-CSharp
-        m_MethodName: StartGame
+        m_TargetAssemblyTypeName: SceneTransition, Assembly-CSharp
+        m_MethodName: StartLevel1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -753,6 +753,7 @@ GameObject:
   - component: {fileID: 1733881206}
   - component: {fileID: 1733881205}
   - component: {fileID: 1733881209}
+  - component: {fileID: 1733881210}
   m_Layer: 5
   m_Name: Start Screen Canvas
   m_TagString: Untagged
@@ -858,6 +859,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fltLevelLoadDelay: 1
+--- !u!225 &1733881210
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733881204}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1790489751
 GameObject:
   m_ObjectHideFlags: 0

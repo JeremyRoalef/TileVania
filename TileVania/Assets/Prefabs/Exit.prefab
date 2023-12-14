@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 6559185405237509826}
   - component: {fileID: 1174409821145272422}
   - component: {fileID: 9092862663557319360}
-  - component: {fileID: 6661585967650112332}
   m_Layer: 14
   m_Name: Exit
-  m_TagString: Untagged
+  m_TagString: Exit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1612735415
-  m_SortingLayer: 10
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 038344d2f7888f94fbbabbfcac2702eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -131,16 +130,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.64}
   m_EdgeRadius: 0
---- !u!114 &6661585967650112332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7064368965682295790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73f58bf015dbd41408dbd4e4161ace41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fltLevelLoadDelay: 1

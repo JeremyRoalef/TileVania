@@ -5,43 +5,95 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransition : MonoBehaviour
 {
-    [SerializeField] float fltLevelLoadDelay = 1f;
 
-    //Updade script to do things if scene level index is last room in the level
-    // ex: if level 1-4 is last level in level 1, return to main menu
-    //change how to swap scenes from using indexes to scene names
 
-    void OnTriggerEnter2D(Collider2D collision)
+    //strLoadScene is used to load scenes by name. Scene name will be created by taking the level value and room value
+    //and combining it into one string.
+    //Ex: to load level 2, room 5, strLoadScene would become "Level 2-5"
+
+    string strLoadScene;
+    int intLevel = 0;
+    int intRoom = 0;
+
+    public CanvasGroup canvas;
+
+    private void Start()
     {
-        if (collision.tag == "Player")
-        {
-            StartCoroutine(LoadNextLevel());
-        }
-
+        canvas = GetComponent<CanvasGroup>();
     }
 
-    public IEnumerator LoadNextLevel()
+    void Awake()
     {
-        yield return new WaitForSecondsRealtime(fltLevelLoadDelay);
-
-        int intCurrentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        int intNextSceneIndex = intCurrentSceneIndex + 1;
-
-        if (intNextSceneIndex == SceneManager.sceneCountInBuildSettings)
+        int intNumGameSession = FindObjectsOfType<SceneTransition>().Length;
+        if (intNumGameSession > 1)
         {
-            intNextSceneIndex = 0;
+            Destroy(gameObject);
         }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
+     public void LoadNextLevel()
+    {
+        intRoom++;
+        strLoadScene = "Level " + intLevel + "-" + intRoom;
+        Debug.Log(strLoadScene);
+
 
         FindObjectOfType<ScenePersist>().ResetScenePersists();
-        SceneManager.LoadScene(intNextSceneIndex);
+
+        if (SceneExists(strLoadScene))
+        {
+            SceneManager.LoadScene(strLoadScene);
+        }
+        else
+        {
+            SceneManager.LoadScene("Start Screen");
+            canvas.interactable = true;
+            canvas.alpha = 1;
+        }
     }
 
-    public void StartGame()
+    public void StartLevel1()
     {
-        SceneManager.LoadScene("Level 1-1");
+        canvas.interactable = false;
+        canvas.alpha = 0;
+
+        intLevel = 1;
+        intRoom = 1;
+
+        strLoadScene = "Level " + intLevel + "-" + intRoom;
+        if (SceneExists(strLoadScene))
+        {
+            SceneManager.LoadScene(strLoadScene);
+        }
+        else
+        {
+            SceneManager.LoadScene("Start Screen");
+            canvas.interactable = true;
+            canvas.alpha = 1;
+        }
+
     }
-    public void Tutorial()
+    public void StartTutorial()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Tutorial");
+    }
+
+
+    //https://github.dev/lordofduct/spacepuppy-unity-framework-3.0/blob/a2bc50c213c90ae955dda0fd479349a64fa530f2/SPScenes/Scenes/SPSceneManager.cs#L153#L164
+    public bool SceneExists(string sceneName, bool excludeInactive = false)
+    {
+        if (excludeInactive)
+        {
+            var sc = SceneManager.GetSceneByName(sceneName);
+            return sc.IsValid();
+        }
+        else
+        {
+            return SceneUtility.GetBuildIndexByScenePath(sceneName) >= 0;
+        }
     }
 }

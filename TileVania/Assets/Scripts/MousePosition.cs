@@ -45,7 +45,7 @@ public class MousePosition : MonoBehaviour
     {
         if (collision.tag == "OutOfBounds")
         {
-            Debug.Log("TRIGGERED");
+            Debug.Log("cannot tp");
             boolPlayerCanTeleport = false;
         }
     }
@@ -54,7 +54,7 @@ public class MousePosition : MonoBehaviour
     {
         if (collision.tag == "OutOfBounds")
         {
-            Debug.Log("TRIGGERED");
+            Debug.Log("can tp");
             boolPlayerCanTeleport = true;
         }
     }

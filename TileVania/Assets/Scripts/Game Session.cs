@@ -15,6 +15,7 @@ public class GameSession : MonoBehaviour
     bool boolPlayerHasTpAbility = false;
 
     int intScore = 0;
+    SceneTransition sceneTransition;
 
     void Awake()
     {
@@ -57,7 +58,9 @@ public class GameSession : MonoBehaviour
     void ResetGameSession()
     {
         FindObjectOfType<ScenePersist>().ResetScenePersists();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Start Screen");
+        FindObjectOfType<SceneTransition>().canvas.interactable = true;
+        FindObjectOfType<SceneTransition>().canvas.alpha = 1.0f;
         Destroy(gameObject);
         
     }
