@@ -19,20 +19,9 @@ public class MousePosition : MonoBehaviour
         Cursor.visible = false;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        /*
-        screenPosition = Mouse.current.position.ReadValue();
-        screenPosition.z = Camera.main.nearClipPlane + 1;
 
-        worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
-
-        transform.position = worldPosition;
-        */
-    }
-
-    private void LateUpdate()
-    {
         screenPosition = Mouse.current.position.ReadValue();
         screenPosition.z = Camera.main.nearClipPlane + 1;
 

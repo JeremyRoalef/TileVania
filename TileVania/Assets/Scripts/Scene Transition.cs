@@ -51,15 +51,14 @@ public class SceneTransition : MonoBehaviour
         else
         {
             SceneManager.LoadScene("Start Screen");
-            canvas.interactable = true;
-            canvas.alpha = 1;
+            ShowCanvas();
         }
     }
 
     public void StartLevel1()
     {
-        canvas.interactable = false;
-        canvas.alpha = 0;
+
+        HideCanvas();
 
         intLevel = 1;
         intRoom = 1;
@@ -72,16 +71,26 @@ public class SceneTransition : MonoBehaviour
         else
         {
             SceneManager.LoadScene("Start Screen");
-            canvas.interactable = true;
-            canvas.alpha = 1;
+            ShowCanvas();
         }
 
     }
     public void StartTutorial()
     {
         SceneManager.LoadScene("Tutorial");
+        HideCanvas();
     }
 
+    private void HideCanvas()
+    {
+        canvas.interactable = false;
+        canvas.alpha = 0;
+    }
+    private void ShowCanvas()
+    {
+        canvas.interactable = true;
+        canvas.alpha = 1;
+    }
 
     //https://github.dev/lordofduct/spacepuppy-unity-framework-3.0/blob/a2bc50c213c90ae955dda0fd479349a64fa530f2/SPScenes/Scenes/SPSceneManager.cs#L153#L164
     public bool SceneExists(string sceneName, bool excludeInactive = false)
