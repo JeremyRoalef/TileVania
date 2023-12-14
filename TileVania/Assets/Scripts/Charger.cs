@@ -16,26 +16,33 @@ public class Charger : MonoBehaviour
     float fltChargerPositionX;
     float fltChargerPositionY;
 
+
+
     [SerializeField] float fltChargerVelocity = 5f;
     [SerializeField]float fltChargeDelay = 3f;
+    [SerializeField] ParticleSystem dirt;
+
+    bool boolCanPlayParticles = false;
     bool boolHasCharged = false;
 
     Rigidbody2D myRigidBody;
 
     void Start()
     {
-        player = FindObjectOfType<PlayerMovement>();
         myRigidBody = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
+        player = FindObjectOfType<PlayerMovement>();
+
         fltChargerPositionX = transform.position.x;
         fltChargerPositionY = transform.position.y;
 
-        fltPlayerPositionX = player.PlayerPositionX();
-        fltPlayerPositionY = player.PlayerPositionY();
+        fltPlayerPositionX = player.transform.position.x;
+        fltPlayerPositionY = player.transform.position.y;
 
+        PlayParticleSystem();
         UpdateChargeTimer();
         Die();
     }
@@ -46,8 +53,6 @@ public class Charger : MonoBehaviour
         {
             Charge();
         }
-
-
     }
 
     private void Charge()
@@ -93,4 +98,21 @@ public class Charger : MonoBehaviour
         }
     }
 
+    void PlayParticleSystem()
+    {
+        if (myRigidBody.IsTouchingLayers(LayerMask.GetMask("Ground")) && myRigidBody.velocity.x != 0)
+        {
+            boolCanPlayParticles = false;
+        }
+        else
+        {
+            boolCanPlayParticles = true;
+        }
+
+        if (boolCanPlayParticles)
+        {
+            dirt.Play();
+        }
+
+    }
 }

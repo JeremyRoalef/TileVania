@@ -45,9 +45,6 @@ public class PlayerMovement : MonoBehaviour
 
 
     float fltGravityScaleAtStart = 4.5f;
-    //store player's position in variables to use in other scripts
-    float fltPlayerPositionX;
-    float fltPlayerPositionY;
 
     MousePosition mousePosition;
 
@@ -64,9 +61,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        //update values of player position
-        fltPlayerPositionX = transform.position.x;
-        fltPlayerPositionY = transform.position.y;
 
         //Debug.Log(fltPlayerPositionX + "," + fltPlayerPositionY);
 
@@ -289,16 +283,6 @@ public class PlayerMovement : MonoBehaviour
         myAnimator.SetBool("boolIsShooting", false);
         Instantiate(projectile, weapon.position, transform.rotation);
         boolIsShooting = false;
-    }
-
-    public float PlayerPositionX()
-    {
-        return fltPlayerPositionX;
-    }
-
-    public float PlayerPositionY()
-    {
-        return fltPlayerPositionY;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
