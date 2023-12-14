@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] float fltwallJumpTime = 1f;
     [SerializeField] float fltPlayerHorizontalWallJumpSpeed;
+    [SerializeField] float fltGrappleSpeed = 10f;
 
     bool boolIsShooting = false;
     bool boolDisableControls = false;
@@ -42,9 +43,11 @@ public class PlayerMovement : MonoBehaviour
     bool boolHasJumped = false;
     bool boolIsWallSliding;
     bool boolIsWallJumping;
+    bool boolHasGrappled = false;
 
 
-
+    Vector2 mouse;
+    Vector2 direction;
     float fltGravityScaleAtStart = 4.5f;
 
     MousePosition mousePosition;
@@ -62,14 +65,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-
         //Debug.Log(fltPlayerPositionX + "," + fltPlayerPositionY);
 
         gameCanvas = FindObjectOfType<GameCanvas>();
         tpUiScript = FindObjectOfType<tpUIscript>();
         mousePosition = FindObjectOfType<MousePosition>();
         gameSession = FindObjectOfType<GameSession>();
-
 
         if (!boolIsAlive)
         {
@@ -92,6 +93,11 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("wall sliding");
         }
+
+        if (boolHasGrappled)
+        {
+            GrapplePlayerToMouse();
+        }
     }
 
     void OnMove(InputValue value)
@@ -108,6 +114,19 @@ public class PlayerMovement : MonoBehaviour
         moveInput = value.Get<Vector2>();
         Debug.Log(moveInput);
     }
+
+    void OnGrapple(InputValue value)
+    {
+
+        Debug.Log("GRAPPLE");
+        myRigidBody.gravityScale = 0;
+
+        mouse = Input.mousePosition;
+        mouse = Camera.main.ScreenToWorldPoint(mouse);
+        boolHasGrappled = true;
+
+    }
+
 
     void Run()
     {
@@ -197,6 +216,10 @@ public class PlayerMovement : MonoBehaviour
 
     void ClimbLadder()
     {
+        if (moveInput.y == 0)
+        {
+            return;
+        }
 
         if (!myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))
         {
@@ -267,8 +290,7 @@ public class PlayerMovement : MonoBehaviour
         gameCanvas.SetTimer();
     }
 
-    //ignore the fact this says ongrapple, its now a teleport and I refuse to change it!
-    void OnGrapple(InputValue value)
+    void OnTeleport(InputValue value)
     {
         if (tpUiScript.TpOnCooldown()) { return; }
         if (!mousePosition.CanTeleport()) { return; }
@@ -328,7 +350,7 @@ public class PlayerMovement : MonoBehaviour
 
     void CheckIfPlayerHasLanded()
     {
-        if (myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground", "Elevator"))){
+        if (myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground", "Elevator"))) {
             boolHasJumped = false;
             myAnimator.SetBool("boolIsJumping", false);
         }
@@ -346,6 +368,19 @@ public class PlayerMovement : MonoBehaviour
         {
             boolIsWallJumping = false;
             fltwallJumpTime = 0.3f;
+        }
+    }
+
+    void GrapplePlayerToMouse()
+    {
+        direction = mouse - (Vector2)transform.position;
+        direction.Normalize();
+        transform.position += (Vector3)(direction * fltGrappleSpeed * Time.deltaTime);
+
+        if (Vector2.Distance(transform.position, mouse) < 0.1f)
+        {
+            boolHasGrappled = false;
+            myRigidBody.gravityScale = fltGravityScaleAtStart;
         }
     }
 }

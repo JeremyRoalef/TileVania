@@ -42,9 +42,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Grapple",
+                    "name": "Teleport",
                     "type": "Button",
                     "id": "a4b64bcb-a525-4346-a208-ce601282f6d8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Grapple",
+                    "type": "Button",
+                    "id": "f0bdc1f4-2bb0-421d-949b-76dad9ea29a5",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -301,6 +310,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+                    "action": "Teleport",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8af00f23-3068-4d6c-8440-725f14e9f60b",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Grapple",
                     "isComposite": false,
                     "isPartOfComposite": false
