@@ -10,17 +10,16 @@ public class Charger : MonoBehaviour
 
     PlayerMovement player;
     float fltPlayerPositionX;
-    float fltPlayerPositionY;
 
     //store charger's position in variable
     float fltChargerPositionX;
-    float fltChargerPositionY;
-
-
 
     [SerializeField] float fltChargerVelocity = 5f;
     [SerializeField]float fltChargeDelay = 3f;
     [SerializeField] ParticleSystem dirt;
+    [SerializeField] ParticleSystem chargerDeathParticleSystem;
+
+
 
     bool boolCanPlayParticles = false;
     bool boolHasCharged = false;
@@ -36,15 +35,23 @@ public class Charger : MonoBehaviour
     {
         player = FindObjectOfType<PlayerMovement>();
 
-        fltChargerPositionX = transform.position.x;
-        fltChargerPositionY = transform.position.y;
 
-        fltPlayerPositionX = player.transform.position.x;
-        fltPlayerPositionY = player.transform.position.y;
+        fltChargerPositionX = transform.position.x;
+
+        if (player != null)
+        {
+            fltPlayerPositionX = player.transform.position.x;
+
+        }
 
         PlayParticleSystem();
         UpdateChargeTimer();
-        Die();
+
+        if (myRigidBody.IsTouchingLayers(LayerMask.GetMask("Hazzard")))
+        {
+            Die();
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -53,6 +60,7 @@ public class Charger : MonoBehaviour
         {
             Charge();
         }
+
     }
 
     private void Charge()
@@ -90,12 +98,19 @@ public class Charger : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Projectile")
+        {
+            Die();
+        }
+    }
+
     void Die()
     {
-        if (myRigidBody.IsTouchingLayers(LayerMask.GetMask("Hazzard")))
-        {
-            Destroy(this.gameObject);
-        }
+            ParticleSystem deathParticles = Instantiate(chargerDeathParticleSystem);
+            deathParticles.transform.position = transform.position;
+            Destroy(gameObject);
     }
 
     void PlayParticleSystem()

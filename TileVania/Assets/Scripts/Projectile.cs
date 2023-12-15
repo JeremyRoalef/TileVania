@@ -34,7 +34,7 @@ public class Projectile : MonoBehaviour
     {
         myRigidBody.velocity = new Vector2(fltXSpeed, 0f);
     }
-
+    /*
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Enemy")
@@ -44,6 +44,7 @@ public class Projectile : MonoBehaviour
 
         Destroy(gameObject);
     }
+    */
     private void OnCollisionEnter2D(Collision2D other)
     {
         Destroy(gameObject);

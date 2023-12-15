@@ -132,6 +132,7 @@ MonoBehaviour:
   fltChargerVelocity: 7
   fltChargeDelay: 3
   dirt: {fileID: 5940849109084624857}
+  chargerDeathParticleSystem: {fileID: 79321639593930258, guid: 8f012679d8f67cb4284712ce80eaddcd, type: 3}
 --- !u!70 &6974100590512600857
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -144,10 +145,10 @@ CapsuleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -5059,7 +5060,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.024837017, y: -0.17230627}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5070,7 +5071,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.8013041, y: 0.65538746}
   m_EdgeRadius: 0
 --- !u!1 &6628368522380743815
 GameObject:
@@ -5098,7 +5099,7 @@ Transform:
   m_GameObject: {fileID: 6628368522380743815}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.742, y: 0, z: 0}
+  m_LocalPosition: {x: -0.649, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5136,7 +5137,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.2937156, y: 0.0038009286}
+  m_Offset: {x: 0.32427633, y: 0.0038009286}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5147,5 +5148,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.57665277, y: 1.0988265}
+  m_Size: {x: 0.5155313, y: 1.0988265}
   m_EdgeRadius: 0

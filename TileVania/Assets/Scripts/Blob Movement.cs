@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using UnityEngine;
 
 public class BlobMovement : MonoBehaviour
@@ -7,6 +8,11 @@ public class BlobMovement : MonoBehaviour
     [SerializeField] float fltMoveSpeed = 1f;
     [SerializeField] ParticleSystem dirt;
     Rigidbody2D myRigidBody;
+    [SerializeField] ParticleSystem death;
+    [SerializeField] GameObject coin;
+
+
+    public ParticleSystem deathParticleSystem;
 
     void Start()
     {
@@ -19,6 +25,7 @@ public class BlobMovement : MonoBehaviour
     {
         myRigidBody.velocity = new Vector2(fltMoveSpeed, 0f);
         FlipTrail();
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -49,6 +56,19 @@ public class BlobMovement : MonoBehaviour
                     dirt.transform.rotation = new Quaternion(0, 0, 0, 1);
                 }
             }
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Projectile")
+        {
+            Instantiate(coin);
+
+            ParticleSystem particleSystem = Instantiate(deathParticleSystem);
+            particleSystem.transform.position = transform.position;
+
+            Destroy(other.gameObject);
+            Destroy(gameObject);
         }
     }
 }

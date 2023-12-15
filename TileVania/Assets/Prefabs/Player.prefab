@@ -5147,6 +5147,8 @@ MonoBehaviour:
     m_Bits: 65536
   fltwallJumpTime: 0.3
   fltPlayerHorizontalWallJumpSpeed: 7.5
+  fltGrappleSpeed: 10
+  playerDeathParticleSystem: {fileID: 1964152058501073166, guid: 5fd090a0a3f7cab45854e1b4eba33c44, type: 3}
 --- !u!70 &6590940817485132767
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

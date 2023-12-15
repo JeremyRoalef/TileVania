@@ -34,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float fltwallJumpTime = 1f;
     [SerializeField] float fltPlayerHorizontalWallJumpSpeed;
     [SerializeField] float fltGrappleSpeed = 10f;
+    [SerializeField] ParticleSystem playerDeathParticleSystem;
+
 
     bool boolIsShooting = false;
     bool boolDisableControls = false;
@@ -216,10 +218,7 @@ public class PlayerMovement : MonoBehaviour
 
     void ClimbLadder()
     {
-        if (moveInput.y == 0)
-        {
-            return;
-        }
+
 
         if (!myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))
         {
@@ -267,6 +266,10 @@ public class PlayerMovement : MonoBehaviour
             myAnimator.SetTrigger("Dying");
             myRigidBody.velocity = deathKick;
 
+            ParticleSystem playerDeath = Instantiate(playerDeathParticleSystem);
+            playerDeath.transform.position = transform.position;
+
+            Destroy(gameObject);
             FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
     }

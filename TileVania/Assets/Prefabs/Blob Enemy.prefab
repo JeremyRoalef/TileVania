@@ -5018,7 +5018,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 252717097
-  m_SortingLayer: 7
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: 58735331, guid: 2ec6cf983219ad844b6ddaedb5b26e22, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5093,6 +5093,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fltMoveSpeed: 1
   dirt: {fileID: 8008087237920635604}
+  death: {fileID: 0}
+  coin: {fileID: 7992906493141692183, guid: 183806138facc334b9c777811daea82e, type: 3}
+  deathParticleSystem: {fileID: 5067142709279248524, guid: 004449ea797d2ee4abc7f8f70e7e4a05, type: 3}
 --- !u!70 &5557798313057852841
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
