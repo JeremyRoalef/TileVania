@@ -35,7 +35,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float fltPlayerHorizontalWallJumpSpeed;
     [SerializeField] float fltGrappleSpeed = 10f;
     [SerializeField] ParticleSystem playerDeathParticleSystem;
+    [SerializeField] GameObject tpCheck;
+    [SerializeField] ParticleSystem tpEffect;
 
+    Rigidbody2D myTpCheck;
 
     bool boolIsShooting = false;
     bool boolDisableControls = false;
@@ -46,7 +49,8 @@ public class PlayerMovement : MonoBehaviour
     bool boolIsWallSliding;
     bool boolIsWallJumping;
     bool boolHasGrappled = false;
-
+    bool boolPlayerCanTp = false;
+    bool boolIsTeleporting = false;
 
     Vector2 mouse;
     Vector2 direction;
@@ -62,13 +66,11 @@ public class PlayerMovement : MonoBehaviour
         myBodyCollider = GetComponent<BoxCollider2D>();
         myFeetCollider = GetComponent<CapsuleCollider2D>();
         wallCheckCollider = wallCheck.GetComponent<BoxCollider2D>();
-
+        myTpCheck = tpCheck.GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        //Debug.Log(fltPlayerPositionX + "," + fltPlayerPositionY);
-
         gameCanvas = FindObjectOfType<GameCanvas>();
         tpUiScript = FindObjectOfType<tpUIscript>();
         mousePosition = FindObjectOfType<MousePosition>();
@@ -100,18 +102,15 @@ public class PlayerMovement : MonoBehaviour
         {
             GrapplePlayerToMouse();
         }
+
+        CheckIfPlayerCanTp();
     }
 
     void OnMove(InputValue value)
     {
-        if (!boolIsAlive)
-        {
-            return;
-        }
-        if (boolDisableControls)
-        {
-            return;
-        }
+        if (!boolIsAlive) { return; }
+        if (boolDisableControls){ return; }
+        if (boolIsTeleporting) { return; }
 
         moveInput = value.Get<Vector2>();
         Debug.Log(moveInput);
@@ -132,10 +131,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Run()
     {
-        if (boolIsWallJumping)
-        {
-            return;
-        }
+        if (boolIsWallJumping) { return; }
+        if (boolIsTeleporting) { return; }
 
         Vector2 playerVelocity = new Vector2(moveInput.x * fltPlayerRunSpeed, myRigidBody.velocity.y);
         myRigidBody.velocity = playerVelocity;
@@ -158,11 +155,25 @@ public class PlayerMovement : MonoBehaviour
 
     void FlipSprite()
     {
+        if (moveInput.x > 0)
+        {
+            transform.localScale = new Vector2(1, 1);
+        }
+        else if (moveInput.x < 0)
+        {
+            transform.localScale = new Vector2(-1, 1);
+        }
+
+
+
+
+
+
         bool boolPlayerHasHorizontalSpeed = Mathf.Abs(myRigidBody.velocity.x) > Mathf.Epsilon;
 
         if (boolPlayerHasHorizontalSpeed)
         {
-            transform.localScale = new Vector2(Mathf.Sign(myRigidBody.velocity.x), 1f);
+            //transform.localScale = new Vector2(Mathf.Sign(myRigidBody.velocity.x), 1f);
             if (Mathf.Sign(myRigidBody.velocity.x) == -1)
             {
                 dirt.transform.rotation = new Quaternion(0, 180, 0, 1);
@@ -222,7 +233,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (!myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))
         {
-            myRigidBody.gravityScale = fltGravityScaleAtStart;
+            //myRigidBody.gravityScale = fltGravityScaleAtStart;
             myAnimator.SetBool("boolIsClimbing", false);
             myAnimator.SetBool("boolIsIdleOnLadder", false);
             boolPlayerIsOnLadder = false;
@@ -296,12 +307,20 @@ public class PlayerMovement : MonoBehaviour
     void OnTeleport(InputValue value)
     {
         if (tpUiScript.TpOnCooldown()) { return; }
-        if (!mousePosition.CanTeleport()) { return; }
         if (!gameSession.PlayerHasTpAbility()) { return; }
+        if (!boolPlayerCanTp) { return; }
 
+        myRigidBody.velocity = new Vector2 (0, 0);
+        myRigidBody.gravityScale = 0;
+        boolIsTeleporting = true;
+
+        myAnimator.SetBool("boolIsRunning",false);
+        myAnimator.SetBool("boolIsJumping", false);
+        myAnimator.SetBool("boolIsTeleporting", true);
 
         tpUiScript.SetTimer();
-        transform.localPosition = mousePosition.GetMousePosition();
+        Invoke("Teleport", 0.5f);
+
     }
 
     void ShootProjectile()
@@ -385,5 +404,31 @@ public class PlayerMovement : MonoBehaviour
             boolHasGrappled = false;
             myRigidBody.gravityScale = fltGravityScaleAtStart;
         }
+    }
+
+    void CheckIfPlayerCanTp()
+    {
+        if (myTpCheck.IsTouchingLayers(LayerMask.GetMask("OutOfBounds")))
+        {
+            Debug.Log("cannot tp");
+            boolPlayerCanTp = false;
+        }
+        else
+        {
+            Debug.Log("can tp");
+            boolPlayerCanTp = true;
+        }
+    }
+
+    void Teleport()
+    {
+        ParticleSystem tpParticleEffect = Instantiate(tpEffect);
+        tpParticleEffect.transform.position = transform.position;
+
+        moveInput.x = 0;
+        myAnimator.SetBool("boolIsTeleporting", false);
+        transform.position = tpCheck.transform.position;
+        boolIsTeleporting = false;
+        myRigidBody.gravityScale = fltGravityScaleAtStart;
     }
 }

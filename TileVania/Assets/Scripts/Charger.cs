@@ -18,7 +18,7 @@ public class Charger : MonoBehaviour
     [SerializeField]float fltChargeDelay = 3f;
     [SerializeField] ParticleSystem dirt;
     [SerializeField] ParticleSystem chargerDeathParticleSystem;
-
+    [SerializeField] GameObject coin;
 
 
     bool boolCanPlayParticles = false;
@@ -102,12 +102,18 @@ public class Charger : MonoBehaviour
     {
         if (collision.tag == "Projectile")
         {
+
+            GameObject coinObject = Instantiate(coin);
+            coinObject.transform.position = transform.position;
+
             Die();
         }
     }
 
     void Die()
     {
+
+
             ParticleSystem deathParticles = Instantiate(chargerDeathParticleSystem);
             deathParticles.transform.position = transform.position;
             Destroy(gameObject);

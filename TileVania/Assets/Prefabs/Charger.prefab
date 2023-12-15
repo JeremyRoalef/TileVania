@@ -133,6 +133,7 @@ MonoBehaviour:
   fltChargeDelay: 3
   dirt: {fileID: 5940849109084624857}
   chargerDeathParticleSystem: {fileID: 79321639593930258, guid: 8f012679d8f67cb4284712ce80eaddcd, type: 3}
+  coin: {fileID: 7992906493141692183, guid: 183806138facc334b9c777811daea82e, type: 3}
 --- !u!70 &6974100590512600857
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5137,7 +5138,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.32427633, y: 0.0038009286}
+  m_Offset: {x: 0.32427633, y: -0.1927535}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5148,5 +5149,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5155313, y: 1.0988265}
+  m_Size: {x: 0.5155313, y: 0.7057177}
   m_EdgeRadius: 0

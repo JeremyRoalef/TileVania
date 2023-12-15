@@ -62,7 +62,8 @@ public class BlobMovement : MonoBehaviour
     {
         if (other.tag == "Projectile")
         {
-            Instantiate(coin);
+            GameObject coinObject = Instantiate(coin);
+            coinObject.transform.position = transform.position;
 
             ParticleSystem particleSystem = Instantiate(deathParticleSystem);
             particleSystem.transform.position = transform.position;
