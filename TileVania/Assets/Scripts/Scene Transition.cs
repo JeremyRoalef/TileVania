@@ -73,12 +73,6 @@ public class SceneTransition : MonoBehaviour
             SceneManager.LoadScene("Start Screen");
             ShowCanvas();
         }
-
-    }
-    public void StartTutorial()
-    {
-        SceneManager.LoadScene("Tutorial");
-        HideCanvas();
     }
 
     private void HideCanvas()

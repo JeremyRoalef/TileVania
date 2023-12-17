@@ -30,8 +30,12 @@ public class BlobMovement : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        fltMoveSpeed = -fltMoveSpeed;
-        FlipEnemyFacing();
+        if (collision.tag == "Platforms")
+        {
+            fltMoveSpeed = -fltMoveSpeed;
+            FlipEnemyFacing();
+        }
+
     }
 
     void FlipEnemyFacing()

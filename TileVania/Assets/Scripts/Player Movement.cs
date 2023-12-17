@@ -38,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameObject tpCheck;
     [SerializeField] ParticleSystem tpEffect;
 
+    SpriteRenderer mySpriteRenderer;
     Rigidbody2D myTpCheck;
 
     bool boolIsShooting = false;
@@ -67,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
         myFeetCollider = GetComponent<CapsuleCollider2D>();
         wallCheckCollider = wallCheck.GetComponent<BoxCollider2D>();
         myTpCheck = tpCheck.GetComponent<Rigidbody2D>();
+        mySpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -116,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log(moveInput);
     }
 
+    /* 
     void OnGrapple(InputValue value)
     {
 
@@ -127,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
         boolHasGrappled = true;
 
     }
-
+    */
 
     void Run()
     {
@@ -229,8 +232,6 @@ public class PlayerMovement : MonoBehaviour
 
     void ClimbLadder()
     {
-
-
         if (!myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))
         {
             //myRigidBody.gravityScale = fltGravityScaleAtStart;
@@ -275,12 +276,10 @@ public class PlayerMovement : MonoBehaviour
         {
             boolIsAlive = false;
             myAnimator.SetTrigger("Dying");
-            myRigidBody.velocity = deathKick;
 
             ParticleSystem playerDeath = Instantiate(playerDeathParticleSystem);
-            playerDeath.transform.position = transform.position;
-
             Destroy(gameObject);
+            playerDeath.transform.position = transform.position;
             FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
     }
@@ -352,6 +351,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Ladder")
+        {
+            myRigidBody.gravityScale = fltGravityScaleAtStart;
+        }
+    }
     void PlayParticleSystem()
     {
         if (myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")) && myRigidBody.velocity.x != 0)
@@ -431,4 +437,5 @@ public class PlayerMovement : MonoBehaviour
         boolIsTeleporting = false;
         myRigidBody.gravityScale = fltGravityScaleAtStart;
     }
+
 }

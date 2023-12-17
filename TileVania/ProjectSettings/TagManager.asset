@@ -13,11 +13,12 @@ TagManager:
   - Exit
   - Projectile
   - Hazzard
+  - Ladder
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - cursor
   - Water
   - UI
   - Ground
